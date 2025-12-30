@@ -179,223 +179,6 @@ const App = () => {
     setShowPreloader(false);
   };
 
-  const styles = {
-    container: {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      background:
-        result === "LOSS"
-          ? "radial-gradient(circle at center, #2a0a0a 0%, #000000 100%)"
-          : "radial-gradient(circle at center, #0f172a 0%, #020617 100%)",
-      color: "#cbd5e1",
-      fontFamily: '"Courier New", Courier, monospace',
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      overflow: "hidden",
-      transition: "background 0.2s cubic-bezier(0.4, 0, 1, 1)",
-      padding: "20px",
-      boxSizing: "border-box",
-    },
-    preloaderContainer: {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      background: "#020617",
-      zIndex: 2000,
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      transition: "opacity 0.5s ease",
-      opacity: showPreloader ? 1 : 0,
-      pointerEvents: showPreloader ? "all" : "none",
-    },
-    logoImage: {
-      width: "150px",
-      height: "150px",
-      borderRadius: "50%",
-      objectFit: "cover",
-      border: "4px solid #334155",
-      boxShadow: "0 0 30px rgba(0,0,0,0.8)",
-      marginBottom: "40px",
-      animation: "shake 10s infinite",
-    },
-    enterBtn: {
-      background: "transparent",
-      border: "2px solid #e2e8f0",
-      color: "#e2e8f0",
-      padding: "15px 40px",
-      fontSize: "1.2rem",
-      fontWeight: "bold",
-      letterSpacing: "4px",
-      cursor: "pointer",
-      textTransform: "uppercase",
-      transition: "all 0.2s",
-      boxShadow: "0 0 15px rgba(226, 232, 240, 0.1)",
-    },
-    contentWrapper: {
-      width: "100%",
-      maxWidth: "420px",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      transform: shakeScreen
-        ? "translate3d(-5px, 0, 0)"
-        : recoilEffect
-        ? "translate3d(0, -10px, 0)"
-        : "none",
-      animation: shakeScreen
-        ? "shake 0.3s cubic-bezier(.36,.07,.19,.97) both"
-        : "none",
-      transition: "transform 0.05s ease-out",
-    },
-    header: {
-      marginBottom: "40px",
-      textAlign: "center",
-      zIndex: 10,
-      borderBottom: "2px solid #334155",
-      paddingBottom: "20px",
-      width: "100%",
-    },
-    title: {
-      fontSize: "1.8rem",
-      fontWeight: "900",
-      letterSpacing: "5px",
-      color: "#f1f5f9",
-      textShadow: "0 0 10px rgba(255,255,255,0.2)",
-      margin: 0,
-      textTransform: "uppercase",
-    },
-    screenArea: {
-      width: "100%",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      marginBottom: "60px",
-      position: "relative",
-      minHeight: "300px",
-      justifyContent: "center",
-    },
-    statusText: {
-      fontSize: "2rem",
-      fontWeight: "700",
-      textAlign: "center",
-      marginBottom: "10px",
-      letterSpacing: "2px",
-      color:
-        result === "LOSS"
-          ? "#ef4444"
-          : result === "SAFE"
-          ? "#e2e8f0"
-          : "#94a3b8",
-      textShadow: result === "LOSS" ? "0 0 30px #ef4444" : "none",
-      transition: "all 0.1s",
-      minHeight: "2rem",
-      textTransform: "uppercase",
-    },
-    counter: {
-      fontSize: "0.9rem",
-      color: "#475569",
-      fontWeight: "600",
-      letterSpacing: "3px",
-      marginBottom: "15px",
-      textTransform: "uppercase",
-      border: "1px solid #334155",
-      padding: "5px 10px",
-      borderRadius: "4px",
-    },
-    controls: {
-      width: "100%",
-      display: "flex",
-      flexDirection: "column",
-      gap: "20px",
-      marginBottom: "20px",
-    },
-    button: {
-      width: "100%",
-      height: "64px",
-      border: "2px solid rgba(255,255,255,0.1)",
-      borderRadius: "4px",
-      fontSize: "1.2rem",
-      fontWeight: "800",
-      cursor: "pointer",
-      transition: "all 0.1s",
-      textTransform: "uppercase",
-      letterSpacing: "2px",
-      position: "relative",
-      overflow: "hidden",
-      background: "#0f172a",
-      color: "#f8fafc",
-    },
-    primaryBtn: {
-      background: "#0f172a",
-      boxShadow: "0 0 20px rgba(0,0,0,0.5)",
-      "&:active": { transform: "scale(0.98)" },
-    },
-    dangerBtn: {
-      background: "#7f1d1d",
-      borderColor: "#991b1b",
-      color: "#fecaca",
-      boxShadow: "0 0 30px rgba(220, 38, 38, 0.2)",
-      textShadow: "0 2px 4px rgba(0,0,0,0.5)",
-    },
-    resetBtn: {
-      background: "transparent",
-      border: "2px solid #475569",
-      color: "#94a3b8",
-    },
-    inputGroup: {
-      display: "flex",
-      flexDirection: "column",
-      gap: "20px",
-      width: "100%",
-      marginBottom: "30px",
-      background: "rgba(0, 0, 0, 0.4)",
-      padding: "30px",
-      borderRadius: "8px",
-      border: "1px solid #334155",
-    },
-    inputLabel: {
-      color: "#e2e8f0",
-      fontSize: "1rem",
-      fontWeight: "700",
-      textTransform: "uppercase",
-      letterSpacing: "2px",
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-    },
-    rangeInput: {
-      width: "100%",
-      height: "4px",
-      background: "#334155",
-      borderRadius: "0",
-      outline: "none",
-      appearance: "none",
-      cursor: "pointer",
-    },
-    flashOverlay: {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      background: "#dc2626",
-      opacity: flashDanger ? 0.6 : 0,
-      pointerEvents: "none",
-      transition: "opacity 0.05s ease-out",
-      zIndex: 999,
-      mixBlendMode: "multiply",
-    },
-  };
-
   useEffect(() => {
     const styleSheet = document.createElement("style");
     styleSheet.innerText = `
@@ -417,154 +200,173 @@ const App = () => {
     return () => document.head.removeChild(styleSheet);
   }, []);
 
+  const containerBgClass =
+    result === "LOSS"
+      ? "bg-[radial-gradient(circle_at_center,_#2a0a0a_0%,_#000000_100%)]"
+      : "bg-[radial-gradient(circle_at_center,_#1e293b_0%,_#020617_120%)]";
+
+  const contentTransform = shakeScreen
+    ? "translate3d(-5px, 0, 0)"
+    : recoilEffect
+    ? "translate3d(0, -10px, 0)"
+    : "none";
+  const contentAnimation = shakeScreen
+    ? "shake 0.3s cubic-bezier(.36,.07,.19,.97) both"
+    : "none";
+
   return (
     <>
       {showPreloader && (
-        <div style={styles.preloaderContainer}>
-          <img src="/logo.jpg" alt="Liar's Bar Logo" style={styles.logoImage} />
-          <h1
-            style={{ ...styles.title, fontSize: "2rem", marginBottom: "40px" }}
-          >
+        <div className="fixed inset-0 z-2000 flex flex-col items-center justify-center bg-slate-950 transition-opacity duration-500 pointer-events-auto">
+          <img
+            src="/logo.jpg"
+            alt="Liar's Bar Logo"
+            className="mb-10 h-[min(150px,30vmin)] w-[min(150px,30vmin)] animate-[shake_10s_infinite] rounded-full border-4 border-slate-700 object-cover shadow-[0_0_30px_rgba(0,0,0,0.8)]"
+          />
+          <h1 className="mb-10 text-center font-['Courier_New'] text-[clamp(1.5rem,6vw,2.5rem)] font-black leading-[1.1] tracking-wider text-slate-100 uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
             LIAR'S BAR
             <br />
             ROULETTE
           </h1>
-          <button style={styles.enterBtn} onClick={enterGame}>
+          <button
+            onClick={enterGame}
+            className="cursor-pointer border-2 border-slate-200 bg-transparent px-10 py-4 font-['Courier_New'] text-xl font-bold tracking-[4px] text-slate-200 uppercase shadow-[0_0_15px_rgba(226,232,240,0.1)] transition-all duration-200"
+          >
             ENTER BAR
           </button>
         </div>
       )}
 
-      <div style={styles.flashOverlay} />
-      <div style={styles.container}>
-        <div style={styles.contentWrapper}>
-          <div style={styles.header}>
-            <h1 style={styles.title}>
+      <div
+        className={`pointer-events-none fixed inset-0 z-9991 bg-red-600 mix-blend-multiply transition-opacity duration-75 ease-out ${
+          flashDanger ? "opacity-60" : "opacity-0"
+        }`}
+      />
+
+      <div className="pointer-events-none fixed inset-0 z-5 bg-[radial-gradient(circle,transparent_40%,#000_120%)]" />
+
+      <div
+        className={`fixed inset-0 flex h-dvh w-full flex-col justify-between overflow-hidden px-5 pb-[max(15px,env(safe-area-inset-bottom))] pt-[max(15px,env(safe-area-inset-top))] transition-[background] duration-200 ease-in box-border font-['Courier_New'] text-slate-300 ${containerBgClass}`}
+      >
+        <div
+          style={{
+            transform: contentTransform,
+            animation: contentAnimation,
+            transition: "transform 0.05s ease-out",
+          }}
+          className="mx-auto flex h-full w-full max-w-[480px] flex-1 flex-col justify-between"
+        >
+          <div className="z-10 mb-2.5 w-full shrink-0 border-b border-slate-700/50 pb-2.5 text-center">
+            <h1 className="m-0 text-[clamp(1.2rem,5vw,2rem)] font-black leading-[1.1] tracking-[min(5px,1.5vw)] text-slate-100 uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
               LIAR'S BAR
               <br />
-              <span style={{ fontSize: "0.6em", color: "#94a3b8" }}>
+              <span className="text-[0.5em] tracking-widest text-slate-400">
                 RUSSIAN ROULETTE
               </span>
             </h1>
           </div>
 
-          <div style={styles.screenArea}>
+          <div className="relative flex min-h-0 w-full flex-1 flex-col items-center justify-center">
             <div
               style={{
-                position: "relative",
-                width: "180px",
-                height: "180px",
-                marginBottom: "40px",
-                transition: "transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                width: "min(280px, 60vw, 35vh)",
+                height: "min(280px, 60vw, 35vh)",
                 transform: `rotate(${currentIndex * -60}deg) scale(${
-                  gameStarted ? 1 : 0.9
+                  gameStarted ? 1 : 0.85
                 })`,
-                opacity: gameStarted ? 1 : 0.7,
+                opacity: gameStarted ? 1 : 0.5,
+                transition: "transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
               }}
+              className="relative mb-5"
             >
               {[...Array(6)].map((_, i) => (
                 <div
                   key={i}
                   style={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    width: "20px",
-                    height: "20px",
-                    background: "#334155",
-                    borderRadius: "50%",
-                    transform: `rotate(${i * 60}deg) translate(70px) rotate(-${
+                    width: "min(30px, 8vw, 5vh)",
+                    height: "min(30px, 8vw, 5vh)",
+                    transform: `rotate(${
                       i * 60
-                    }deg)`,
-                    marginLeft: "-10px",
-                    marginTop: "-10px",
+                    }deg) translate(min(100px, 22vw)) rotate(-${i * 60}deg)`,
+                    marginLeft: "calc(min(30px, 8vw) / -2)",
+                    marginTop: "calc(min(30px, 8vw) / -2)",
                     boxShadow:
                       i === currentIndex
-                        ? "0 0 20px rgba(255,255,255,0.2)"
+                        ? "0 0 20px rgba(255,255,255,0.3)"
                         : "inset 0 0 5px rgba(0,0,0,0.5)",
                     border:
                       i === currentIndex
                         ? "2px solid #e2e8f0"
                         : "2px solid #1e293b",
-                    transition: "all 0.3s",
                   }}
+                  className="absolute left-1/2 top-1/2 rounded-full bg-slate-700 transition-all duration-300"
                 />
               ))}
               <div
                 style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
                   transform: `translate(-50%, -50%) rotate(${
                     currentIndex * 60
                   }deg)`,
-                  width: "50px",
-                  height: "50px",
-                  borderRadius: "50%",
-                  border: "4px solid #1e293b",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "#475569",
-                  fontSize: "0.9rem",
-                  fontWeight: "900",
-                  background: "#0f172a",
                 }}
+                className="absolute left-1/2 top-1/2 flex h-[35%] w-[35%] items-center justify-center rounded-full border-4 border-slate-800 bg-slate-950 font-black text-slate-600 text-[clamp(0.8rem,4vw,1.2rem)] shadow-[inset_0_0_20px_rgba(0,0,0,0.8)]"
               >
                 {6 - shotsTaken}
               </div>
             </div>
 
             {!gameStarted ? (
-              <div style={{ width: "100%" }}>
-                <div style={styles.inputGroup}>
-                  <label style={styles.inputLabel}>
+              <div className="w-full px-2.5">
+                <div className="mb-2.5 flex w-full flex-col gap-4 rounded-2xl border border-slate-700 bg-slate-950/50 p-5 backdrop-blur-sm">
+                  <label className="flex items-center justify-between text-sm font-bold tracking-widest text-slate-200 uppercase">
                     LOADED ROUNDS:{" "}
-                    <span style={{ color: "#ef4444", fontWeight: "bold" }}>
+                    <span className="text-2xl font-bold text-red-500">
                       {bulletCount}
                     </span>
                   </label>
-                  <input
-                    type="range"
-                    min="1"
-                    max="5"
+                  <select
                     value={bulletCount}
                     onChange={(e) => setBulletCount(parseInt(e.target.value))}
-                    style={styles.rangeInput}
-                  />
+                    className="h-12 w-full cursor-pointer appearance-none rounded-lg border border-slate-700 bg-slate-900 px-4 font-['Courier_New'] text-base font-bold tracking-wide text-slate-100 outline-none"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23cbd5e1%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")`,
+                      backgroundRepeat: "no-repeat",
+                      backgroundPosition: "right 15px center",
+                      backgroundSize: "12px",
+                    }}
+                  >
+                    <option value="1">1 ROUND (17%)</option>
+                    <option value="2">2 ROUNDS (33%)</option>
+                    <option value="3">3 ROUNDS (50%)</option>
+                    <option value="4">4 ROUNDS (67%)</option>
+                    <option value="5">5 ROUNDS (83%)</option>
+                  </select>
                 </div>
-                <p
-                  style={{
-                    color: "#94a3b8",
-                    fontSize: "0.8rem",
-                    textAlign: "center",
-                    textTransform: "uppercase",
-                    letterSpacing: "1px",
-                  }}
-                >
+                <p className="text-center text-xs tracking-widest text-slate-400 uppercase">
                   FATAL ODDS:{" "}
                   <strong>{((bulletCount / 6) * 100).toFixed(0)}%</strong>
                 </p>
               </div>
             ) : (
               <>
-                <div style={styles.counter}>
+                <div className="mb-2.5 rounded-full border border-slate-700 bg-slate-900/50 px-3 py-1 text-[0.8rem] font-semibold tracking-[3px] text-slate-600 uppercase">
                   {shotsTaken === 0 ? "TABLE SET" : `ROUND ${shotsTaken + 1}`}
                 </div>
-                <div style={styles.statusText}>{statusMessage}</div>
+                <div
+                  className={`mb-1.5 flex min-h-10 items-center text-center text-[clamp(1.5rem,5vw,2.5rem)] font-bold tracking-widest uppercase transition-all duration-100 ${
+                    result === "LOSS"
+                      ? "text-red-500 drop-shadow-[0_0_30px_#ef4444]"
+                      : result === "SAFE"
+                      ? "text-slate-200"
+                      : "text-slate-400"
+                  }`}
+                  style={{ lineHeight: 1 }}
+                >
+                  {statusMessage}
+                </div>
                 {!gameOver && (
-                  <p
-                    style={{
-                      color: "#64748b",
-                      fontSize: "0.7rem",
-                      marginTop: "5px",
-                      marginBottom: "20px",
-                      textTransform: "uppercase",
-                      letterSpacing: "2px",
-                    }}
-                  >
+                  <p className="mt-1.5 text-xs tracking-widest text-slate-500 uppercase opacity-80">
                     SURVIVAL ODDS:{" "}
-                    <span style={{ color: "#e2e8f0" }}>
+                    <span className="font-bold text-slate-200">
                       {(
                         ((6 - shotsTaken - bulletCount) / (6 - shotsTaken)) *
                         100
@@ -577,34 +379,30 @@ const App = () => {
             )}
           </div>
 
-          <div style={styles.controls}>
+          <div className="mt-auto flex w-full shrink-0 flex-col gap-2.5 pt-2.5">
             {!gameStarted ? (
               <button
-                style={{ ...styles.button, ...styles.primaryBtn }}
                 onClick={initGame}
+                className="flex h-16 w-full touch-manipulation items-center justify-center overflow-hidden rounded-xl border-2 border-slate-100/10 bg-linear-to-b from-slate-800 to-slate-900 text-[1.2rem] font-extrabold tracking-widest text-slate-50 uppercase shadow-[0_4px_0_#020617] transition-all duration-100 active:translate-y-0.5 active:shadow-[0_2px_0_#020617]"
               >
                 SIT AT TABLE
               </button>
             ) : (
               <>
                 <button
-                  style={{
-                    ...styles.button,
-                    ...styles.dangerBtn,
-                    opacity: gameOver ? 0.5 : 1,
-                    cursor: gameOver ? "not-allowed" : "pointer",
-                    display: gameOver ? "none" : "block",
-                  }}
                   onClick={handleTrigger}
                   disabled={gameOver}
+                  className={`flex h-16 w-full touch-manipulation items-center justify-center overflow-hidden rounded-xl border-2 border-red-800 bg-linear-to-b from-red-900 to-red-950 text-[1.2rem] font-extrabold tracking-widest text-red-100 uppercase shadow-[0_4px_0_#450a0a] text-shadow-[0_2px_4px_rgba(0,0,0,0.5)] transition-all duration-100 ${
+                    gameOver ? "pointer-events-none hidden opacity-50" : "flex"
+                  } active:translate-y-0.5 active:shadow-[0_2px_0_#450a0a] shadow-[0_0_30px_rgba(220,38,38,0.1),0_4px_0_#450a0a]`}
                 >
                   PULL TRIGGER
                 </button>
 
                 {gameOver && (
                   <button
-                    style={{ ...styles.button, ...styles.resetBtn }}
                     onClick={resetGame}
+                    className="flex h-14 w-full cursor-pointer items-center justify-center rounded-xl border-2 border-slate-600 bg-transparent text-[1.2rem] font-extrabold tracking-widest text-slate-400 uppercase transition-all duration-100"
                   >
                     PLAY AGAIN
                   </button>
